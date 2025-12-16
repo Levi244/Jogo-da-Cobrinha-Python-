@@ -18,6 +18,11 @@ verde = (0, 255, 0)
 tamanho_quadrado = 15
 velocidade_cobra = 15
 
+def gerar_comida():
+    comida_x = round(random.randrange(0, largura - tamanho_quadrado) / 20.0) * 20.0
+    comida_y = round(random.randrange(0, altura - tamanho_quadrado) / 20.0) * 20.0
+    return comida_x, comida_y
+
 def rodar_jogo():
     fim_jogo = False
 
@@ -30,6 +35,8 @@ def rodar_jogo():
 
     tamanho_cobra = 1
     pixels_cobra = []
+
+    comida_x, comida_y = gerar_comida()
 
     while not fim_jogo:
         tela.fill(preto)    
