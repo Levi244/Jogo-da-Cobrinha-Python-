@@ -16,12 +16,16 @@ verde = (0, 255, 0)
 
 # Definir parametros
 tamanho_quadrado = 15
-velocidade_cobra = 15
+velocidade_jogo = 15
 
 def gerar_comida():
     comida_x = round(random.randrange(0, largura - tamanho_quadrado) / 20.0) * 20.0
     comida_y = round(random.randrange(0, altura - tamanho_quadrado) / 20.0) * 20.0
     return comida_x, comida_y
+
+def desenhar_comida(tamanho, comida_x, comida_y):
+    pygame.draw.rect(tela, verde, [comida_x, comida_y, tamanho, tamanho])
+
 
 def rodar_jogo():
     fim_jogo = False
@@ -45,9 +49,16 @@ def rodar_jogo():
             if evento.type == pygame.QUIT:
                 fim_jogo = True
 
+#Desenhar_Comida
+
+        desenhar_comida(tamanho_quadrado, comida_x, comida_y)
+
         fonte = pygame.font.SysFont(None, 55)
         mensagem = fonte.render("Jogo da Cobrinha em Python", True, branco)
         tela.blit(mensagem, [largura / 6, altura / 3])
 
-        pygame.display.update()
-        relogio.tick(15)
+
+#Atualizar_Tela
+
+    pygame.display.update()
+    relogio.tick(velocidade_jogo)
