@@ -26,6 +26,14 @@ def gerar_comida():
 def desenhar_comida(tamanho, comida_x, comida_y):
     pygame.draw.rect(tela, verde, [comida_x, comida_y, tamanho, tamanho])
 
+def desenhar_cobra(tamanho, pixels):
+    for pixel in pixels:
+        pygame.draw.rect(tela, branco, [pixel[0], pixel[1], tamanho, tamanho])
+
+def desenhar_pontuacao(pontuacao):
+    fonte = pygame.font.SysFont("Helvetica", 35)
+    texto = fonte.render("Pontos: {pontuacao}", True, verde)
+    tela.blit(texto, [1, 1])
 
 def rodar_jogo():
     fim_jogo = False
@@ -52,6 +60,19 @@ def rodar_jogo():
 #Desenhar_Comida
 
         desenhar_comida(tamanho_quadrado, comida_x, comida_y)
+
+#Desenhar_Cobra
+
+        pixels.append([x, y])
+        if len(pixels) > tamanho_cobra:
+            del pixels[0]
+
+        for pixel in pixels[:-1]:
+            if pixel == [x, y]:
+                fim_jogo = True
+
+            desenhar_cobra(tamanho_quadrado, pixels)
+            desenhar_pontuacao(tamanho_cobra - 1)
 
         fonte = pygame.font.SysFont(None, 55)
         mensagem = fonte.render("Jogo da Cobrinha em Python", True, branco)
